@@ -1,0 +1,797 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="DB_ProjeYonetimModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="principal_id" Type="int" Nullable="false" />
+          <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="version" Type="int" />
+          <Property Name="definition" Type="varbinary(max)" />
+        </EntityType>
+        <EntityType Name="tbl_EkDosya">
+          <Key>
+            <PropertyRef Name="id_EkDosya" />
+          </Key>
+          <Property Name="id_EkDosya" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="id_Gorev" Type="int" Nullable="false" />
+          <Property Name="EkDosyaAd" Type="nvarchar" MaxLength="250" Nullable="false" />
+          <Property Name="EkDosyaURL" Type="nvarchar(max)" Nullable="false" />
+        </EntityType>
+        <EntityType Name="tbl_Etiket">
+          <Key>
+            <PropertyRef Name="id_Etiket" />
+          </Key>
+          <Property Name="id_Etiket" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="id_Gorev" Type="int" Nullable="false" />
+          <Property Name="EtiketAd" Type="nvarchar" MaxLength="25" Nullable="false" />
+          <Property Name="EtiketRenk" Type="varchar" MaxLength="6" Nullable="false" />
+        </EntityType>
+        <EntityType Name="tbl_Gorev">
+          <Key>
+            <PropertyRef Name="id_Gorev" />
+          </Key>
+          <Property Name="id_Gorev" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="id_Liste" Type="smallint" Nullable="false" />
+          <Property Name="GorevAd" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="Aciklama" Type="nvarchar" MaxLength="250" />
+          <Property Name="OlusturulmaTarihi" Type="datetime" Nullable="false" />
+          <Property Name="BitisTarihi" Type="datetime" Nullable="false" />
+          <Property Name="GorevResim" Type="nvarchar(max)" />
+        </EntityType>
+        <EntityType Name="tbl_GorevKullanici">
+          <Key>
+            <PropertyRef Name="id_GorevKullanici" />
+          </Key>
+          <Property Name="id_GorevKullanici" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="id_Gorev" Type="int" Nullable="false" />
+          <Property Name="id_Kullanici" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="tbl_Kullanici">
+          <Key>
+            <PropertyRef Name="id_Kullanici" />
+          </Key>
+          <Property Name="id_Kullanici" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="id_KullaniciTur" Type="smallint" Nullable="false" />
+          <Property Name="Ad" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Soyad" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="AdSoyad" Type="nvarchar" MaxLength="101" StoreGeneratedPattern="Computed" Nullable="false" />
+          <Property Name="Eposta" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="Sifre" Type="nvarchar" MaxLength="130" Nullable="false" />
+          <Property Name="Resim" Type="nvarchar(max)" />
+        </EntityType>
+        <EntityType Name="tbl_KullaniciTur">
+          <Key>
+            <PropertyRef Name="id_KullaniciTur" />
+          </Key>
+          <Property Name="id_KullaniciTur" Type="smallint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="TurAd" Type="nvarchar" MaxLength="100" Nullable="false" />
+        </EntityType>
+        <EntityType Name="tbl_Liste">
+          <Key>
+            <PropertyRef Name="id_Liste" />
+          </Key>
+          <Property Name="id_Liste" Type="smallint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="id_Proje" Type="int" Nullable="false" />
+          <Property Name="ListeAd" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Aciklama" Type="nvarchar" MaxLength="500" />
+        </EntityType>
+        <EntityType Name="tbl_Proje">
+          <Key>
+            <PropertyRef Name="id_Proje" />
+          </Key>
+          <Property Name="id_Proje" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="id_ProjeDurumTur" Type="tinyint" Nullable="false" />
+          <Property Name="ProjeAd" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="Aciklama" Type="nvarchar" MaxLength="500" />
+          <Property Name="ProjeResim" Type="nvarchar(max)" />
+          <Property Name="id_Kullanici" Type="int" Nullable="false" />
+          <Property Name="OlusturmaTarihi" Type="datetime" Nullable="false" />
+        </EntityType>
+        <EntityType Name="tbl_ProjeDurumTur">
+          <Key>
+            <PropertyRef Name="id_ProjeDurumTur" />
+          </Key>
+          <Property Name="id_ProjeDurumTur" Type="tinyint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ProjeDurumTurAd" Type="nvarchar" MaxLength="25" Nullable="false" />
+        </EntityType>
+        <EntityType Name="tbl_ProjeKullanici">
+          <Key>
+            <PropertyRef Name="id_ProjeKullanici" />
+          </Key>
+          <Property Name="id_ProjeKullanici" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="id_Proje" Type="int" Nullable="false" />
+          <Property Name="id_Kullanici" Type="int" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_tbl_EkDosya_tbl_Gorev">
+          <End Role="tbl_Gorev" Type="Self.tbl_Gorev" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="tbl_EkDosya" Type="Self.tbl_EkDosya" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbl_Gorev">
+              <PropertyRef Name="id_Gorev" />
+            </Principal>
+            <Dependent Role="tbl_EkDosya">
+              <PropertyRef Name="id_Gorev" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tbl_Etiket_tbl_Gorev">
+          <End Role="tbl_Gorev" Type="Self.tbl_Gorev" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="tbl_Etiket" Type="Self.tbl_Etiket" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbl_Gorev">
+              <PropertyRef Name="id_Gorev" />
+            </Principal>
+            <Dependent Role="tbl_Etiket">
+              <PropertyRef Name="id_Gorev" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tbl_Gorev_tbl_Liste">
+          <End Role="tbl_Liste" Type="Self.tbl_Liste" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="tbl_Gorev" Type="Self.tbl_Gorev" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbl_Liste">
+              <PropertyRef Name="id_Liste" />
+            </Principal>
+            <Dependent Role="tbl_Gorev">
+              <PropertyRef Name="id_Liste" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tbl_GorevKullanici_tbl_Gorev">
+          <End Role="tbl_Gorev" Type="Self.tbl_Gorev" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="tbl_GorevKullanici" Type="Self.tbl_GorevKullanici" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbl_Gorev">
+              <PropertyRef Name="id_Gorev" />
+            </Principal>
+            <Dependent Role="tbl_GorevKullanici">
+              <PropertyRef Name="id_Gorev" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tbl_GorevKullanici_tbl_Kullanici">
+          <End Role="tbl_Kullanici" Type="Self.tbl_Kullanici" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="tbl_GorevKullanici" Type="Self.tbl_GorevKullanici" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbl_Kullanici">
+              <PropertyRef Name="id_Kullanici" />
+            </Principal>
+            <Dependent Role="tbl_GorevKullanici">
+              <PropertyRef Name="id_Kullanici" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tbl_Kullanici_tbl_KullaniciTur">
+          <End Role="tbl_KullaniciTur" Type="Self.tbl_KullaniciTur" Multiplicity="1" />
+          <End Role="tbl_Kullanici" Type="Self.tbl_Kullanici" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbl_KullaniciTur">
+              <PropertyRef Name="id_KullaniciTur" />
+            </Principal>
+            <Dependent Role="tbl_Kullanici">
+              <PropertyRef Name="id_KullaniciTur" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tbl_Liste_tbl_Proje">
+          <End Role="tbl_Proje" Type="Self.tbl_Proje" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="tbl_Liste" Type="Self.tbl_Liste" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbl_Proje">
+              <PropertyRef Name="id_Proje" />
+            </Principal>
+            <Dependent Role="tbl_Liste">
+              <PropertyRef Name="id_Proje" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tbl_Proje_tbl_Kullanici">
+          <End Role="tbl_Kullanici" Type="Self.tbl_Kullanici" Multiplicity="1" />
+          <End Role="tbl_Proje" Type="Self.tbl_Proje" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbl_Kullanici">
+              <PropertyRef Name="id_Kullanici" />
+            </Principal>
+            <Dependent Role="tbl_Proje">
+              <PropertyRef Name="id_Kullanici" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tbl_Proje_tbl_ProjeDurumTur">
+          <End Role="tbl_ProjeDurumTur" Type="Self.tbl_ProjeDurumTur" Multiplicity="1" />
+          <End Role="tbl_Proje" Type="Self.tbl_Proje" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbl_ProjeDurumTur">
+              <PropertyRef Name="id_ProjeDurumTur" />
+            </Principal>
+            <Dependent Role="tbl_Proje">
+              <PropertyRef Name="id_ProjeDurumTur" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tbl_ProjeKullanici_tbl_Kullanici">
+          <End Role="tbl_Kullanici" Type="Self.tbl_Kullanici" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="tbl_ProjeKullanici" Type="Self.tbl_ProjeKullanici" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbl_Kullanici">
+              <PropertyRef Name="id_Kullanici" />
+            </Principal>
+            <Dependent Role="tbl_ProjeKullanici">
+              <PropertyRef Name="id_Kullanici" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tbl_ProjeKullanici_tbl_Proje">
+          <End Role="tbl_Proje" Type="Self.tbl_Proje" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="tbl_ProjeKullanici" Type="Self.tbl_ProjeKullanici" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbl_Proje">
+              <PropertyRef Name="id_Proje" />
+            </Principal>
+            <Dependent Role="tbl_ProjeKullanici">
+              <PropertyRef Name="id_Proje" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="DB_ProjeYonetimModelStoreContainer">
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tbl_EkDosya" EntityType="Self.tbl_EkDosya" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tbl_Etiket" EntityType="Self.tbl_Etiket" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tbl_Gorev" EntityType="Self.tbl_Gorev" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tbl_GorevKullanici" EntityType="Self.tbl_GorevKullanici" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tbl_Kullanici" EntityType="Self.tbl_Kullanici" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tbl_KullaniciTur" EntityType="Self.tbl_KullaniciTur" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tbl_Liste" EntityType="Self.tbl_Liste" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tbl_Proje" EntityType="Self.tbl_Proje" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tbl_ProjeDurumTur" EntityType="Self.tbl_ProjeDurumTur" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tbl_ProjeKullanici" EntityType="Self.tbl_ProjeKullanici" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_tbl_EkDosya_tbl_Gorev" Association="Self.FK_tbl_EkDosya_tbl_Gorev">
+            <End Role="tbl_Gorev" EntitySet="tbl_Gorev" />
+            <End Role="tbl_EkDosya" EntitySet="tbl_EkDosya" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tbl_Etiket_tbl_Gorev" Association="Self.FK_tbl_Etiket_tbl_Gorev">
+            <End Role="tbl_Gorev" EntitySet="tbl_Gorev" />
+            <End Role="tbl_Etiket" EntitySet="tbl_Etiket" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tbl_Gorev_tbl_Liste" Association="Self.FK_tbl_Gorev_tbl_Liste">
+            <End Role="tbl_Liste" EntitySet="tbl_Liste" />
+            <End Role="tbl_Gorev" EntitySet="tbl_Gorev" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tbl_GorevKullanici_tbl_Gorev" Association="Self.FK_tbl_GorevKullanici_tbl_Gorev">
+            <End Role="tbl_Gorev" EntitySet="tbl_Gorev" />
+            <End Role="tbl_GorevKullanici" EntitySet="tbl_GorevKullanici" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tbl_GorevKullanici_tbl_Kullanici" Association="Self.FK_tbl_GorevKullanici_tbl_Kullanici">
+            <End Role="tbl_Kullanici" EntitySet="tbl_Kullanici" />
+            <End Role="tbl_GorevKullanici" EntitySet="tbl_GorevKullanici" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tbl_Kullanici_tbl_KullaniciTur" Association="Self.FK_tbl_Kullanici_tbl_KullaniciTur">
+            <End Role="tbl_KullaniciTur" EntitySet="tbl_KullaniciTur" />
+            <End Role="tbl_Kullanici" EntitySet="tbl_Kullanici" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tbl_Liste_tbl_Proje" Association="Self.FK_tbl_Liste_tbl_Proje">
+            <End Role="tbl_Proje" EntitySet="tbl_Proje" />
+            <End Role="tbl_Liste" EntitySet="tbl_Liste" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tbl_Proje_tbl_Kullanici" Association="Self.FK_tbl_Proje_tbl_Kullanici">
+            <End Role="tbl_Kullanici" EntitySet="tbl_Kullanici" />
+            <End Role="tbl_Proje" EntitySet="tbl_Proje" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tbl_Proje_tbl_ProjeDurumTur" Association="Self.FK_tbl_Proje_tbl_ProjeDurumTur">
+            <End Role="tbl_ProjeDurumTur" EntitySet="tbl_ProjeDurumTur" />
+            <End Role="tbl_Proje" EntitySet="tbl_Proje" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tbl_ProjeKullanici_tbl_Kullanici" Association="Self.FK_tbl_ProjeKullanici_tbl_Kullanici">
+            <End Role="tbl_Kullanici" EntitySet="tbl_Kullanici" />
+            <End Role="tbl_ProjeKullanici" EntitySet="tbl_ProjeKullanici" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tbl_ProjeKullanici_tbl_Proje" Association="Self.FK_tbl_ProjeKullanici_tbl_Proje">
+            <End Role="tbl_Proje" EntitySet="tbl_Proje" />
+            <End Role="tbl_ProjeKullanici" EntitySet="tbl_ProjeKullanici" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="DB_ProjeYonetimModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="principal_id" Type="Int32" Nullable="false" />
+          <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="version" Type="Int32" />
+          <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+        </EntityType>
+        <EntityType Name="tbl_EkDosya">
+          <Key>
+            <PropertyRef Name="id_EkDosya" />
+          </Key>
+          <Property Name="id_EkDosya" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="id_Gorev" Type="Int32" Nullable="false" />
+          <Property Name="EkDosyaAd" Type="String" MaxLength="250" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="EkDosyaURL" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="tbl_Gorev" Relationship="Self.FK_tbl_EkDosya_tbl_Gorev" FromRole="tbl_EkDosya" ToRole="tbl_Gorev" />
+        </EntityType>
+        <EntityType Name="tbl_Etiket">
+          <Key>
+            <PropertyRef Name="id_Etiket" />
+          </Key>
+          <Property Name="id_Etiket" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="id_Gorev" Type="Int32" Nullable="false" />
+          <Property Name="EtiketAd" Type="String" MaxLength="25" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="EtiketRenk" Type="String" MaxLength="6" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="tbl_Gorev" Relationship="Self.FK_tbl_Etiket_tbl_Gorev" FromRole="tbl_Etiket" ToRole="tbl_Gorev" />
+        </EntityType>
+        <EntityType Name="tbl_Gorev">
+          <Key>
+            <PropertyRef Name="id_Gorev" />
+          </Key>
+          <Property Name="id_Gorev" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="id_Liste" Type="Int16" Nullable="false" />
+          <Property Name="GorevAd" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Aciklama" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="OlusturulmaTarihi" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="BitisTarihi" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="GorevResim" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="tbl_EkDosya" Relationship="Self.FK_tbl_EkDosya_tbl_Gorev" FromRole="tbl_Gorev" ToRole="tbl_EkDosya" />
+          <NavigationProperty Name="tbl_Etiket" Relationship="Self.FK_tbl_Etiket_tbl_Gorev" FromRole="tbl_Gorev" ToRole="tbl_Etiket" />
+          <NavigationProperty Name="tbl_Liste" Relationship="Self.FK_tbl_Gorev_tbl_Liste" FromRole="tbl_Gorev" ToRole="tbl_Liste" />
+          <NavigationProperty Name="tbl_GorevKullanici" Relationship="Self.FK_tbl_GorevKullanici_tbl_Gorev" FromRole="tbl_Gorev" ToRole="tbl_GorevKullanici" />
+        </EntityType>
+        <EntityType Name="tbl_GorevKullanici">
+          <Key>
+            <PropertyRef Name="id_GorevKullanici" />
+          </Key>
+          <Property Name="id_GorevKullanici" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="id_Gorev" Type="Int32" Nullable="false" />
+          <Property Name="id_Kullanici" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="tbl_Gorev" Relationship="Self.FK_tbl_GorevKullanici_tbl_Gorev" FromRole="tbl_GorevKullanici" ToRole="tbl_Gorev" />
+          <NavigationProperty Name="tbl_Kullanici" Relationship="Self.FK_tbl_GorevKullanici_tbl_Kullanici" FromRole="tbl_GorevKullanici" ToRole="tbl_Kullanici" />
+        </EntityType>
+        <EntityType Name="tbl_Kullanici">
+          <Key>
+            <PropertyRef Name="id_Kullanici" />
+          </Key>
+          <Property Name="id_Kullanici" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="id_KullaniciTur" Type="Int16" Nullable="false" />
+          <Property Name="Ad" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Soyad" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="AdSoyad" Type="String" MaxLength="101" FixedLength="false" Unicode="true" Nullable="false" annotation:StoreGeneratedPattern="Computed" />
+          <Property Name="Eposta" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Sifre" Type="String" MaxLength="130" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Resim" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="tbl_GorevKullanici" Relationship="Self.FK_tbl_GorevKullanici_tbl_Kullanici" FromRole="tbl_Kullanici" ToRole="tbl_GorevKullanici" />
+          <NavigationProperty Name="tbl_KullaniciTur" Relationship="Self.FK_tbl_Kullanici_tbl_KullaniciTur" FromRole="tbl_Kullanici" ToRole="tbl_KullaniciTur" />
+          <NavigationProperty Name="tbl_Proje" Relationship="Self.FK_tbl_Proje_tbl_Kullanici" FromRole="tbl_Kullanici" ToRole="tbl_Proje" />
+          <NavigationProperty Name="tbl_ProjeKullanici" Relationship="Self.FK_tbl_ProjeKullanici_tbl_Kullanici" FromRole="tbl_Kullanici" ToRole="tbl_ProjeKullanici" />
+        </EntityType>
+        <EntityType Name="tbl_KullaniciTur">
+          <Key>
+            <PropertyRef Name="id_KullaniciTur" />
+          </Key>
+          <Property Name="id_KullaniciTur" Type="Int16" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="TurAd" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="tbl_Kullanici" Relationship="Self.FK_tbl_Kullanici_tbl_KullaniciTur" FromRole="tbl_KullaniciTur" ToRole="tbl_Kullanici" />
+        </EntityType>
+        <EntityType Name="tbl_Liste">
+          <Key>
+            <PropertyRef Name="id_Liste" />
+          </Key>
+          <Property Name="id_Liste" Type="Int16" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="id_Proje" Type="Int32" Nullable="false" />
+          <Property Name="ListeAd" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Aciklama" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="tbl_Gorev" Relationship="Self.FK_tbl_Gorev_tbl_Liste" FromRole="tbl_Liste" ToRole="tbl_Gorev" />
+          <NavigationProperty Name="tbl_Proje" Relationship="Self.FK_tbl_Liste_tbl_Proje" FromRole="tbl_Liste" ToRole="tbl_Proje" />
+        </EntityType>
+        <EntityType Name="tbl_Proje">
+          <Key>
+            <PropertyRef Name="id_Proje" />
+          </Key>
+          <Property Name="id_Proje" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="id_ProjeDurumTur" Type="Byte" Nullable="false" />
+          <Property Name="ProjeAd" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Aciklama" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="ProjeResim" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="id_Kullanici" Type="Int32" Nullable="false" />
+          <Property Name="OlusturmaTarihi" Type="DateTime" Nullable="false" Precision="3" />
+          <NavigationProperty Name="tbl_Kullanici" Relationship="Self.FK_tbl_Proje_tbl_Kullanici" FromRole="tbl_Proje" ToRole="tbl_Kullanici" />
+          <NavigationProperty Name="tbl_Liste" Relationship="Self.FK_tbl_Liste_tbl_Proje" FromRole="tbl_Proje" ToRole="tbl_Liste" />
+          <NavigationProperty Name="tbl_ProjeDurumTur" Relationship="Self.FK_tbl_Proje_tbl_ProjeDurumTur" FromRole="tbl_Proje" ToRole="tbl_ProjeDurumTur" />
+          <NavigationProperty Name="tbl_ProjeKullanici" Relationship="Self.FK_tbl_ProjeKullanici_tbl_Proje" FromRole="tbl_Proje" ToRole="tbl_ProjeKullanici" />
+        </EntityType>
+        <EntityType Name="tbl_ProjeDurumTur">
+          <Key>
+            <PropertyRef Name="id_ProjeDurumTur" />
+          </Key>
+          <Property Name="id_ProjeDurumTur" Type="Byte" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ProjeDurumTurAd" Type="String" MaxLength="25" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="tbl_Proje" Relationship="Self.FK_tbl_Proje_tbl_ProjeDurumTur" FromRole="tbl_ProjeDurumTur" ToRole="tbl_Proje" />
+        </EntityType>
+        <EntityType Name="tbl_ProjeKullanici">
+          <Key>
+            <PropertyRef Name="id_ProjeKullanici" />
+          </Key>
+          <Property Name="id_ProjeKullanici" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="id_Proje" Type="Int32" Nullable="false" />
+          <Property Name="id_Kullanici" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="tbl_Kullanici" Relationship="Self.FK_tbl_ProjeKullanici_tbl_Kullanici" FromRole="tbl_ProjeKullanici" ToRole="tbl_Kullanici" />
+          <NavigationProperty Name="tbl_Proje" Relationship="Self.FK_tbl_ProjeKullanici_tbl_Proje" FromRole="tbl_ProjeKullanici" ToRole="tbl_Proje" />
+        </EntityType>
+        <Association Name="FK_tbl_EkDosya_tbl_Gorev">
+          <End Role="tbl_Gorev" Type="Self.tbl_Gorev" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="tbl_EkDosya" Type="Self.tbl_EkDosya" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbl_Gorev">
+              <PropertyRef Name="id_Gorev" />
+            </Principal>
+            <Dependent Role="tbl_EkDosya">
+              <PropertyRef Name="id_Gorev" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tbl_Etiket_tbl_Gorev">
+          <End Role="tbl_Gorev" Type="Self.tbl_Gorev" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="tbl_Etiket" Type="Self.tbl_Etiket" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbl_Gorev">
+              <PropertyRef Name="id_Gorev" />
+            </Principal>
+            <Dependent Role="tbl_Etiket">
+              <PropertyRef Name="id_Gorev" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tbl_Gorev_tbl_Liste">
+          <End Role="tbl_Liste" Type="Self.tbl_Liste" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="tbl_Gorev" Type="Self.tbl_Gorev" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbl_Liste">
+              <PropertyRef Name="id_Liste" />
+            </Principal>
+            <Dependent Role="tbl_Gorev">
+              <PropertyRef Name="id_Liste" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tbl_GorevKullanici_tbl_Gorev">
+          <End Role="tbl_Gorev" Type="Self.tbl_Gorev" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="tbl_GorevKullanici" Type="Self.tbl_GorevKullanici" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbl_Gorev">
+              <PropertyRef Name="id_Gorev" />
+            </Principal>
+            <Dependent Role="tbl_GorevKullanici">
+              <PropertyRef Name="id_Gorev" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tbl_GorevKullanici_tbl_Kullanici">
+          <End Role="tbl_Kullanici" Type="Self.tbl_Kullanici" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="tbl_GorevKullanici" Type="Self.tbl_GorevKullanici" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbl_Kullanici">
+              <PropertyRef Name="id_Kullanici" />
+            </Principal>
+            <Dependent Role="tbl_GorevKullanici">
+              <PropertyRef Name="id_Kullanici" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tbl_Kullanici_tbl_KullaniciTur">
+          <End Role="tbl_KullaniciTur" Type="Self.tbl_KullaniciTur" Multiplicity="1" />
+          <End Role="tbl_Kullanici" Type="Self.tbl_Kullanici" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbl_KullaniciTur">
+              <PropertyRef Name="id_KullaniciTur" />
+            </Principal>
+            <Dependent Role="tbl_Kullanici">
+              <PropertyRef Name="id_KullaniciTur" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tbl_Proje_tbl_Kullanici">
+          <End Role="tbl_Kullanici" Type="Self.tbl_Kullanici" Multiplicity="1" />
+          <End Role="tbl_Proje" Type="Self.tbl_Proje" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbl_Kullanici">
+              <PropertyRef Name="id_Kullanici" />
+            </Principal>
+            <Dependent Role="tbl_Proje">
+              <PropertyRef Name="id_Kullanici" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tbl_ProjeKullanici_tbl_Kullanici">
+          <End Role="tbl_Kullanici" Type="Self.tbl_Kullanici" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="tbl_ProjeKullanici" Type="Self.tbl_ProjeKullanici" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbl_Kullanici">
+              <PropertyRef Name="id_Kullanici" />
+            </Principal>
+            <Dependent Role="tbl_ProjeKullanici">
+              <PropertyRef Name="id_Kullanici" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tbl_Liste_tbl_Proje">
+          <End Role="tbl_Proje" Type="Self.tbl_Proje" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="tbl_Liste" Type="Self.tbl_Liste" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbl_Proje">
+              <PropertyRef Name="id_Proje" />
+            </Principal>
+            <Dependent Role="tbl_Liste">
+              <PropertyRef Name="id_Proje" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tbl_Proje_tbl_ProjeDurumTur">
+          <End Role="tbl_ProjeDurumTur" Type="Self.tbl_ProjeDurumTur" Multiplicity="1" />
+          <End Role="tbl_Proje" Type="Self.tbl_Proje" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbl_ProjeDurumTur">
+              <PropertyRef Name="id_ProjeDurumTur" />
+            </Principal>
+            <Dependent Role="tbl_Proje">
+              <PropertyRef Name="id_ProjeDurumTur" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tbl_ProjeKullanici_tbl_Proje">
+          <End Role="tbl_Proje" Type="Self.tbl_Proje" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="tbl_ProjeKullanici" Type="Self.tbl_ProjeKullanici" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbl_Proje">
+              <PropertyRef Name="id_Proje" />
+            </Principal>
+            <Dependent Role="tbl_ProjeKullanici">
+              <PropertyRef Name="id_Proje" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="DB_ProjeYonetimEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" />
+          <EntitySet Name="tbl_EkDosya" EntityType="Self.tbl_EkDosya" />
+          <EntitySet Name="tbl_Etiket" EntityType="Self.tbl_Etiket" />
+          <EntitySet Name="tbl_Gorev" EntityType="Self.tbl_Gorev" />
+          <EntitySet Name="tbl_GorevKullanici" EntityType="Self.tbl_GorevKullanici" />
+          <EntitySet Name="tbl_Kullanici" EntityType="Self.tbl_Kullanici" />
+          <EntitySet Name="tbl_KullaniciTur" EntityType="Self.tbl_KullaniciTur" />
+          <EntitySet Name="tbl_Liste" EntityType="Self.tbl_Liste" />
+          <EntitySet Name="tbl_Proje" EntityType="Self.tbl_Proje" />
+          <EntitySet Name="tbl_ProjeDurumTur" EntityType="Self.tbl_ProjeDurumTur" />
+          <EntitySet Name="tbl_ProjeKullanici" EntityType="Self.tbl_ProjeKullanici" />
+          <AssociationSet Name="FK_tbl_EkDosya_tbl_Gorev" Association="Self.FK_tbl_EkDosya_tbl_Gorev">
+            <End Role="tbl_Gorev" EntitySet="tbl_Gorev" />
+            <End Role="tbl_EkDosya" EntitySet="tbl_EkDosya" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tbl_Etiket_tbl_Gorev" Association="Self.FK_tbl_Etiket_tbl_Gorev">
+            <End Role="tbl_Gorev" EntitySet="tbl_Gorev" />
+            <End Role="tbl_Etiket" EntitySet="tbl_Etiket" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tbl_Gorev_tbl_Liste" Association="Self.FK_tbl_Gorev_tbl_Liste">
+            <End Role="tbl_Liste" EntitySet="tbl_Liste" />
+            <End Role="tbl_Gorev" EntitySet="tbl_Gorev" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tbl_GorevKullanici_tbl_Gorev" Association="Self.FK_tbl_GorevKullanici_tbl_Gorev">
+            <End Role="tbl_Gorev" EntitySet="tbl_Gorev" />
+            <End Role="tbl_GorevKullanici" EntitySet="tbl_GorevKullanici" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tbl_GorevKullanici_tbl_Kullanici" Association="Self.FK_tbl_GorevKullanici_tbl_Kullanici">
+            <End Role="tbl_Kullanici" EntitySet="tbl_Kullanici" />
+            <End Role="tbl_GorevKullanici" EntitySet="tbl_GorevKullanici" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tbl_Kullanici_tbl_KullaniciTur" Association="Self.FK_tbl_Kullanici_tbl_KullaniciTur">
+            <End Role="tbl_KullaniciTur" EntitySet="tbl_KullaniciTur" />
+            <End Role="tbl_Kullanici" EntitySet="tbl_Kullanici" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tbl_Proje_tbl_Kullanici" Association="Self.FK_tbl_Proje_tbl_Kullanici">
+            <End Role="tbl_Kullanici" EntitySet="tbl_Kullanici" />
+            <End Role="tbl_Proje" EntitySet="tbl_Proje" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tbl_ProjeKullanici_tbl_Kullanici" Association="Self.FK_tbl_ProjeKullanici_tbl_Kullanici">
+            <End Role="tbl_Kullanici" EntitySet="tbl_Kullanici" />
+            <End Role="tbl_ProjeKullanici" EntitySet="tbl_ProjeKullanici" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tbl_Liste_tbl_Proje" Association="Self.FK_tbl_Liste_tbl_Proje">
+            <End Role="tbl_Proje" EntitySet="tbl_Proje" />
+            <End Role="tbl_Liste" EntitySet="tbl_Liste" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tbl_Proje_tbl_ProjeDurumTur" Association="Self.FK_tbl_Proje_tbl_ProjeDurumTur">
+            <End Role="tbl_ProjeDurumTur" EntitySet="tbl_ProjeDurumTur" />
+            <End Role="tbl_Proje" EntitySet="tbl_Proje" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tbl_ProjeKullanici_tbl_Proje" Association="Self.FK_tbl_ProjeKullanici_tbl_Proje">
+            <End Role="tbl_Proje" EntitySet="tbl_Proje" />
+            <End Role="tbl_ProjeKullanici" EntitySet="tbl_ProjeKullanici" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="DB_ProjeYonetimModelStoreContainer" CdmEntityContainer="DB_ProjeYonetimEntities">
+          <EntitySetMapping Name="sysdiagrams">
+            <EntityTypeMapping TypeName="DB_ProjeYonetimModel.sysdiagrams">
+              <MappingFragment StoreEntitySet="sysdiagrams">
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="principal_id" ColumnName="principal_id" />
+                <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
+                <ScalarProperty Name="version" ColumnName="version" />
+                <ScalarProperty Name="definition" ColumnName="definition" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tbl_EkDosya">
+            <EntityTypeMapping TypeName="DB_ProjeYonetimModel.tbl_EkDosya">
+              <MappingFragment StoreEntitySet="tbl_EkDosya">
+                <ScalarProperty Name="id_EkDosya" ColumnName="id_EkDosya" />
+                <ScalarProperty Name="id_Gorev" ColumnName="id_Gorev" />
+                <ScalarProperty Name="EkDosyaAd" ColumnName="EkDosyaAd" />
+                <ScalarProperty Name="EkDosyaURL" ColumnName="EkDosyaURL" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tbl_Etiket">
+            <EntityTypeMapping TypeName="DB_ProjeYonetimModel.tbl_Etiket">
+              <MappingFragment StoreEntitySet="tbl_Etiket">
+                <ScalarProperty Name="id_Etiket" ColumnName="id_Etiket" />
+                <ScalarProperty Name="id_Gorev" ColumnName="id_Gorev" />
+                <ScalarProperty Name="EtiketAd" ColumnName="EtiketAd" />
+                <ScalarProperty Name="EtiketRenk" ColumnName="EtiketRenk" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tbl_Gorev">
+            <EntityTypeMapping TypeName="DB_ProjeYonetimModel.tbl_Gorev">
+              <MappingFragment StoreEntitySet="tbl_Gorev">
+                <ScalarProperty Name="id_Gorev" ColumnName="id_Gorev" />
+                <ScalarProperty Name="id_Liste" ColumnName="id_Liste" />
+                <ScalarProperty Name="GorevAd" ColumnName="GorevAd" />
+                <ScalarProperty Name="Aciklama" ColumnName="Aciklama" />
+                <ScalarProperty Name="OlusturulmaTarihi" ColumnName="OlusturulmaTarihi" />
+                <ScalarProperty Name="BitisTarihi" ColumnName="BitisTarihi" />
+                <ScalarProperty Name="GorevResim" ColumnName="GorevResim" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tbl_GorevKullanici">
+            <EntityTypeMapping TypeName="DB_ProjeYonetimModel.tbl_GorevKullanici">
+              <MappingFragment StoreEntitySet="tbl_GorevKullanici">
+                <ScalarProperty Name="id_GorevKullanici" ColumnName="id_GorevKullanici" />
+                <ScalarProperty Name="id_Gorev" ColumnName="id_Gorev" />
+                <ScalarProperty Name="id_Kullanici" ColumnName="id_Kullanici" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tbl_Kullanici">
+            <EntityTypeMapping TypeName="DB_ProjeYonetimModel.tbl_Kullanici">
+              <MappingFragment StoreEntitySet="tbl_Kullanici">
+                <ScalarProperty Name="id_Kullanici" ColumnName="id_Kullanici" />
+                <ScalarProperty Name="id_KullaniciTur" ColumnName="id_KullaniciTur" />
+                <ScalarProperty Name="Ad" ColumnName="Ad" />
+                <ScalarProperty Name="Soyad" ColumnName="Soyad" />
+                <ScalarProperty Name="AdSoyad" ColumnName="AdSoyad" />
+                <ScalarProperty Name="Eposta" ColumnName="Eposta" />
+                <ScalarProperty Name="Sifre" ColumnName="Sifre" />
+                <ScalarProperty Name="Resim" ColumnName="Resim" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tbl_KullaniciTur">
+            <EntityTypeMapping TypeName="DB_ProjeYonetimModel.tbl_KullaniciTur">
+              <MappingFragment StoreEntitySet="tbl_KullaniciTur">
+                <ScalarProperty Name="id_KullaniciTur" ColumnName="id_KullaniciTur" />
+                <ScalarProperty Name="TurAd" ColumnName="TurAd" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tbl_Liste">
+            <EntityTypeMapping TypeName="DB_ProjeYonetimModel.tbl_Liste">
+              <MappingFragment StoreEntitySet="tbl_Liste">
+                <ScalarProperty Name="id_Liste" ColumnName="id_Liste" />
+                <ScalarProperty Name="id_Proje" ColumnName="id_Proje" />
+                <ScalarProperty Name="ListeAd" ColumnName="ListeAd" />
+                <ScalarProperty Name="Aciklama" ColumnName="Aciklama" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tbl_Proje">
+            <EntityTypeMapping TypeName="DB_ProjeYonetimModel.tbl_Proje">
+              <MappingFragment StoreEntitySet="tbl_Proje">
+                <ScalarProperty Name="id_Proje" ColumnName="id_Proje" />
+                <ScalarProperty Name="id_ProjeDurumTur" ColumnName="id_ProjeDurumTur" />
+                <ScalarProperty Name="ProjeAd" ColumnName="ProjeAd" />
+                <ScalarProperty Name="Aciklama" ColumnName="Aciklama" />
+                <ScalarProperty Name="ProjeResim" ColumnName="ProjeResim" />
+                <ScalarProperty Name="id_Kullanici" ColumnName="id_Kullanici" />
+                <ScalarProperty Name="OlusturmaTarihi" ColumnName="OlusturmaTarihi" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tbl_ProjeDurumTur">
+            <EntityTypeMapping TypeName="DB_ProjeYonetimModel.tbl_ProjeDurumTur">
+              <MappingFragment StoreEntitySet="tbl_ProjeDurumTur">
+                <ScalarProperty Name="id_ProjeDurumTur" ColumnName="id_ProjeDurumTur" />
+                <ScalarProperty Name="ProjeDurumTurAd" ColumnName="ProjeDurumTurAd" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tbl_ProjeKullanici">
+            <EntityTypeMapping TypeName="DB_ProjeYonetimModel.tbl_ProjeKullanici">
+              <MappingFragment StoreEntitySet="tbl_ProjeKullanici">
+                <ScalarProperty Name="id_ProjeKullanici" ColumnName="id_ProjeKullanici" />
+                <ScalarProperty Name="id_Proje" ColumnName="id_Proje" />
+                <ScalarProperty Name="id_Kullanici" ColumnName="id_Kullanici" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

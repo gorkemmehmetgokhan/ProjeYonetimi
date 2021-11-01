@@ -1,0 +1,1 @@
+﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="frmCikis.aspx.cs" Inherits="ProjeYonetim.frmCikis" %>

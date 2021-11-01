@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="fe9984747a244c5eb1a75006e61886ba" Name="Diagram1">
+        <EntityTypeShape EntityType="DB_ProjeYonetimModel.sysdiagrams" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="DB_ProjeYonetimModel.tbl_EkDosya" Width="1.5" PointX="15" PointY="4.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="DB_ProjeYonetimModel.tbl_Etiket" Width="1.5" PointX="15" PointY="6.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="DB_ProjeYonetimModel.tbl_Gorev" Width="1.5" PointX="12.75" PointY="4.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="DB_ProjeYonetimModel.tbl_GorevKullanici" Width="1.5" PointX="5.25" PointY="5.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="DB_ProjeYonetimModel.tbl_Kullanici" Width="1.5" PointX="3" PointY="4.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="DB_ProjeYonetimModel.tbl_KullaniciTur" Width="1.5" PointX="0.75" PointY="5.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="DB_ProjeYonetimModel.tbl_Liste" Width="1.5" PointX="10.5" PointY="5.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="DB_ProjeYonetimModel.tbl_Proje" Width="1.5" PointX="8.25" PointY="4.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="DB_ProjeYonetimModel.tbl_ProjeDurumTur" Width="1.5" PointX="6" PointY="2.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="DB_ProjeYonetimModel.tbl_ProjeKullanici" Width="1.5" PointX="10.5" PointY="2.375" IsExpanded="true" />
+        <AssociationConnector Association="DB_ProjeYonetimModel.FK_tbl_EkDosya_tbl_Gorev" ManuallyRouted="false" />
+        <AssociationConnector Association="DB_ProjeYonetimModel.FK_tbl_Etiket_tbl_Gorev" ManuallyRouted="false" />
+        <AssociationConnector Association="DB_ProjeYonetimModel.FK_tbl_Gorev_tbl_Liste" ManuallyRouted="false" />
+        <AssociationConnector Association="DB_ProjeYonetimModel.FK_tbl_GorevKullanici_tbl_Gorev" ManuallyRouted="false" />
+        <AssociationConnector Association="DB_ProjeYonetimModel.FK_tbl_GorevKullanici_tbl_Kullanici" ManuallyRouted="false" />
+        <AssociationConnector Association="DB_ProjeYonetimModel.FK_tbl_Kullanici_tbl_KullaniciTur" ManuallyRouted="false" />
+        <AssociationConnector Association="DB_ProjeYonetimModel.FK_tbl_Proje_tbl_Kullanici" ManuallyRouted="false" />
+        <AssociationConnector Association="DB_ProjeYonetimModel.FK_tbl_ProjeKullanici_tbl_Kullanici" ManuallyRouted="false" />
+        <AssociationConnector Association="DB_ProjeYonetimModel.FK_tbl_Liste_tbl_Proje" ManuallyRouted="false" />
+        <AssociationConnector Association="DB_ProjeYonetimModel.FK_tbl_Proje_tbl_ProjeDurumTur" ManuallyRouted="false" />
+        <AssociationConnector Association="DB_ProjeYonetimModel.FK_tbl_ProjeKullanici_tbl_Proje" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

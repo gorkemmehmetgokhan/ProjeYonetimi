@@ -1,0 +1,87 @@
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="Site.master.cs" Inherits="ProjeYonetim.Site" %>
+
+<!DOCTYPE html>
+
+<html>
+<head runat="server">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta name="author" content="Dashboard">
+
+    <title>Proje Yönetim Sistemi</title>
+
+    <link href="Content/css/bootstrap.css" rel="stylesheet">
+    <link href="Content/font-awesome/css/font-awesome.css" rel="stylesheet" />
+
+    <link href="Content/css/style.css" rel="stylesheet">
+    <link href="Content/css/style-responsive.css" rel="stylesheet">
+
+    <asp:ContentPlaceHolder ID="cphHead" runat="server">
+    </asp:ContentPlaceHolder>
+</head>
+<body>
+    <form id="form" runat="server">
+
+        <section id="container">
+            <header class="header black-bg">
+                <div class="sidebar-toggle-box">
+                    <div class="fa fa-bars tooltips" data-placement="right" data-original-title="Toggle Navigation"></div>
+                </div>
+                <a href="/anasayfa" class="logo"><b>Proje Yönetim Sistemi</b></a>
+
+                <div class="top-menu">
+                    <ul class="nav pull-right top-menu">
+                        <li><a class="logout" href="/cikis">Çıkış</a></li>
+                    </ul>
+                </div>
+            </header>
+
+            <aside>
+                <div id="sidebar" class="nav-collapse ">
+                    <ul class="sidebar-menu" id="nav-accordion">
+                        <p class="centered">
+                            <img src="<%= myKullanici != null ? myKullanici.Resim : "" %>" class="img-circle" width="60" height="60">
+                        </p>
+                        <h5 class="centered"><%= myKullanici != null ? myKullanici.AdSoyad : "" %> <%=myKullanici != null ? " [" + myKullanici.tbl_KullaniciTur.TurAd + "]" : "" %></h5>
+
+                        <li class="mt">
+                            <a class="active" href="/anasayfa">
+                                <i class="fa fa-dashboard"></i>
+                                <span>Projeler</span>
+                            </a>
+                        </li>
+
+                    </ul>
+                </div>
+            </aside>
+
+            <section id="main-content">
+                <section class="wrapper">
+
+                    <asp:ContentPlaceHolder ID="cphBody" runat="server">
+                    </asp:ContentPlaceHolder>
+
+                </section>
+            </section>
+
+            <footer class="site-footer">
+                <div class="text-center">
+                    ©2021 - Proje Yönetim Sistemi
+              <a href="index.html#" class="go-top">
+                  <i class="fa fa-angle-up"></i>
+              </a>
+                </div>
+            </footer>
+
+            <script src="../Scripts/jquery.js"></script>
+            <script src="../Scripts/bootstrap.min.js"></script>
+            <script src="../Scripts/common-scripts.js"></script>
+
+            <asp:ContentPlaceHolder ID="cphBodyScript" runat="server">
+            </asp:ContentPlaceHolder>
+
+        </section>
+    </form>
+</body>
+</html>
